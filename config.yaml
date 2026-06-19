@@ -1,0 +1,81 @@
+seed: 20260615
+
+paths:
+  transcripts_root: ../transcripts
+  solo_dir: solo-david-senra            # TARGET (relative to transcripts_root)
+  interview_dir: with-founders-david-senra
+  floor_solo_dir: floor-solo            # optional; populated later by fetch.py; may be empty
+  manifest: manifest.csv                # written by vet.py
+  style_card: style_card.md
+  clean_corpus_dir: runs/corpus_clean   # vet.py writes header/timestamp-stripped text here
+  runs_dir: runs
+
+models:
+  generation: claude-sonnet-4-6         # C1/C2/C3 outputs
+  judge: claude-sonnet-4-6              # one LLM-judge per axis (studied object)
+  luar: rrivera1849/LUAR-MUD            # transformers AutoModel trust_remote_code=True, CPU
+  embed: sentence-transformers/all-MiniLM-L6-v2
+  luar_max_tokens: 512                  # chunk long texts to this; mean-pool chunk embeddings
+  device: cpu
+  host_label: David Senra               # interviews: this speaker = host; every other named speaker = guest floor
+
+generation:
+  conditions: [C1, C2, C3]             # C1 = generic centroid (not human-rated); C2 = style no-RAG; C3 = RAG
+  ablation_levels: [full, none]        # 2-level style-card ablation (full vs none); applied to C2 + C3
+  n_prompts: 16                        # seeded prompt set, shared across conditions
+  max_output_tokens: 1200
+  temperature: 0.9
+  system: "You are a skilled prose writer. Output ONLY the requested passage as continuous prose. Do not include a title, heading, preamble, reasoning, self-correction, false starts, or any meta-commentary. Begin the passage directly and write it completely."
+  judged_conditions: [C2, C3]          # conditions sent to the LLM judges (C1 excluded to save cost)
+
+retrieval:
+  method: bm25
+  chunk_words: 220
+  chunk_overlap_words: 40
+  top_k: 5
+
+gate:                                   # memorisation safeguard (C3 only), runs BEFORE scoring
+  ngram_orders: [5, 8]                  # sliding-window verbatim-overlap n-gram sizes
+  jaccard_threshold: 0.15               # copy_flag if max n-gram-Jaccard(output, source) > this
+  window_words: 30                      # sliding-window for near-duplicate-aware overlap
+  window_overlap_threshold: 0.5         # copy_flag if window-overlap fraction > this
+  compare_against: [retrieved_chunks, archive]
+
+fidelity:
+  luar_sanity_anchor_texts:             # two short same-register written passages to confirm LUAR loads/works
+    - "luar_anchor_a.txt"
+    - "luar_anchor_b.txt"
+  luar_sanity_min_self_cosine: 0.5      # anchor passes if the two same-register passages cosine above this
+  burrows:
+    n_function_words: 150               # MFW set built from the clean corpus
+    preflight_min_accuracy: 0.70        # Delta must rank held-out real-Senra vs real-floor >= this; else SKIP+flag
+    preflight_passage_words: 300        # held-out passage length ~= output length
+
+novelty:
+  distinct_n_orders: [1, 2]
+  divergence_metric: cosine             # 1 - cosine to nearest retrieved chunk AND to C1 centroid
+
+analysis:
+  bootstrap_iters: 10000                # cluster-bootstrap reps for construct-validity CIs (pre-registered)
+  ci: 0.95
+  separation_r_threshold: 0.6           # human voice-match vs human originality; |r|>0.6 => 2-axis NOT supported
+  alpha_threshold: 0.667                # Krippendorff 2004; if pilot alpha < this -> forced-choice fidelity item
+  holm_max_confirmatory: 4
+  primary_confirmatory: [calibrated_luar, llm_judge_fidelity]   # the ONE pre-registered contrast (fidelity axis)
+  fidelity_proxies: [calibrated_luar, burrows_delta, llm_judge_fidelity]   # block-diagonal: screened vs HUMAN fidelity only
+  novelty_proxies: [dual_divergence, distinct_n, llm_judge_novelty]        # screened vs HUMAN novelty only
+  clean_subset:                         # RQ3 ASR-noise vs invalidity (manually-corrected episodes)
+    - ""                                # filenames added when the clean Whisper subset exists
+
+vetting:                                # gate thresholds (recorded as DATA in manifest.csv)
+  min_words: 3000
+  max_caption_junk_ratio: 0.05          # repeated-token / filler ratio ceiling
+  caption_quality_min_mattr: 0.40       # length-invariant MATTR; clean speech ~0.55-0.62, garbled << 0.40
+  max_dup_jaccard: 0.85                 # near-duplicate episode rejection (5-gram Jaccard)
+  single_speaker_max_other_label_ratio: 0.10   # reject if too much non-primary-speaker labelled text
+  clip_handoff_markers:                 # clip-handoff detection (Senra plays someone else's audio)
+    - "this is the audio from"
+    - "i'm going to play you"
+    - "i want to play you"
+    - "let me play you"
+    - "going to play a clip"
