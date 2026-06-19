@@ -1,0 +1,7 @@
+selector,certifier,bo8_gain,ci_lo,ci_hi,ci_excludes_zero,oracle_gain,capture_share
+LUAR,-Burrows,-0.00656,-0.02167,0.00988,False,0.12189,-0.054
+LUAR,certifier,-0.00031,-0.00259,0.00224,False,0.01246,-0.025
+-Burrows,LUAR,-0.05896,-0.51821,0.35562,False,2.02763,-0.029
+-Burrows,certifier,0.00112,-0.00065,0.00299,False,0.01246,0.09
+certifier,LUAR,0.17707,-0.16706,0.49818,False,2.02763,0.087
+certifier,-Burrows,0.00825,-0.01228,0.02635,False,0.12189,0.068

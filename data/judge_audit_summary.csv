@@ -1,0 +1,3 @@
+axis,n,n_distinct_values,mode,mode_share,normalized_entropy,mean,sd,reason_words_mean,reason_words_sd,mean_C2,mean_C3
+fidelity,64,3,3.0,0.8438,0.4931,3.0,0.398,39.7,8.3,2.906,3.094
+novelty,64,4,3.0,0.625,0.6438,3.266,0.597,42.0,6.8,3.5,3.031

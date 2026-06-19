@@ -1,0 +1,8 @@
+policy,mean,ci_lo,ci_hi
+random,0.04105,0.03752,0.0448
+within_bo8,0.04074,0.03778,0.04346
+cross_bo8,0.04379,0.03756,0.04927
+cross_oracle8,0.05878,0.05253,0.06318
+gain_within_vs_random,-0.00031,-0.00337,0.00262
+gain_cross_vs_random,0.00274,-0.00074,0.0053
+gain_cross_vs_within,0.00306,-0.00124,0.00797

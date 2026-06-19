@@ -1,0 +1,2 @@
+n_cells,mean,median,sd,min,max,q25,q75,frac_within_pm02,frac_negative
+64,0.016,-0.012,0.397,-0.738,0.857,-0.274,0.333,0.328,0.5

@@ -1,0 +1,4 @@
+scope,spearman_luar_vs_heldout
+pooled (all candidates),0.273
+within-cell (mean; what best-of-N selects over),0.016
+between-cell (cell means),0.4346

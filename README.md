@@ -86,12 +86,29 @@ python construct_validity.py        # known-groups + MTMM + confirmatory family
 python partii_analysis.py           # best-of-N selection study
 ```
 
+## Reproducing the numbers
+
+The pre-registration is in `preregistration.md`. Every number behind the paper's tables and figures
+is released as a result CSV in `data/`, alongside the per-output proxy scores. The construct-validity
+statistics regenerate from these CSVs with no corpus required — set `paths.runs_dir: data` in
+`config.yaml` (or copy `data/*.csv` into a `runs/` directory) and run:
+
+```bash
+python construct_validity.py     # known-groups, MTMM, confirmatory family
+python judge_audit.py            # LLM-judge audit
+python partii_analysis.py        # selection study
+```
+
+Steps that rebuild embeddings (the LUAR / MiniLM scoring) additionally require the corpus and do not
+run without it.
+
 ## Data and reuse
 
-The source corpus is third-party copyrighted material and is **not** included. The hand-authored
-style card (`style_card.md`, used for the C2 condition) is included; the transcripts, generated
-outputs, and any derived corpus data are not. With your own transcripts placed under the path set
-in `config.yaml` (`transcripts_root`), the results regenerate deterministically under the fixed
-seed. The code is shared for academic reference and reproduction.
+The source corpus is third-party copyrighted material and is **not** included — neither are the
+generated outputs or any derived corpus text. What ships here is the code, the hand-authored style
+card (`style_card.md`), the pre-registration, and the numeric metric CSVs in `data/` (all free-text
+columns removed). With your own transcripts under the path set in `config.yaml` (`transcripts_root`),
+the full pipeline regenerates deterministically under the fixed seed. The code is shared for academic
+reference and reproduction.
 
 Author: Karla Lučić

@@ -1,0 +1,4 @@
+proxy,scope,n,full_minus_none,ci_lo,ci_hi,cliffs_delta,wilcoxon_p_one_sided,ci_excludes_zero
+calibrated_luar,C2,16,3.4883,2.2037,4.8036,0.719,8e-05,True
+calibrated_luar,C3,16,2.3541,1.0693,3.7711,0.531,0.00258,True
+calibrated_luar,pooled,32,2.9212,1.992,3.9128,0.625,0.0,True

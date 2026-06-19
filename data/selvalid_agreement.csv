@@ -1,0 +1,11 @@
+metric_a,metric_b,sp_pooled,sp_between,sp_within_mean
+LUAR,-Burrows,0.197,0.376,0.028
+LUAR,certifier,0.273,0.435,0.016
+LUAR,distinct-2,-0.361,-0.531,-0.092
+LUAR,dual-div,-0.119,-0.123,-0.085
+-Burrows,certifier,0.133,0.22,0.051
+-Burrows,distinct-2,0.128,0.028,0.203
+-Burrows,dual-div,0.099,0.221,-0.005
+certifier,distinct-2,-0.168,-0.212,-0.059
+certifier,dual-div,-0.253,-0.309,-0.066
+distinct-2,dual-div,0.039,0.099,-0.143

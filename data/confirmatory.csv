@@ -1,0 +1,5 @@
+id,claim,p,ci_excludes_null,holm_reject,confirmed
+C1,LUAR recovers C1<C2<C3 (none),0.00773,True,True,True
+C2,style card raises LUAR (full>none),0.0,True,True,True
+C3,distinct_n falls C1->C3 (none),7.62939453125e-05,True,True,True
+C4,MTMM convergent>discriminant (C3),0.2398,False,False,False

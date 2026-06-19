@@ -1,0 +1,5 @@
+condition,fidelity_axis,n,spearman_fid_vs_novelty,ci_lo,ci_hi,ci_excludes_zero
+C2,calibrated_luar,256,-0.4471,-0.5189,-0.3501,True
+C2,neg_burrows,256,0.1371,0.0132,0.268,True
+C3,calibrated_luar,256,-0.2276,-0.3732,-0.0766,True
+C3,neg_burrows,256,0.1929,0.0665,0.302,True

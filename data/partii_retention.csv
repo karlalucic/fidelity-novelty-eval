@@ -1,0 +1,4 @@
+policy,heldout
+random (mean),0.04105
+greedy LUAR best-of-8,0.04074
+oracle held-out best,0.05351

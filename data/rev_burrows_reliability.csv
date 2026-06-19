@@ -1,0 +1,2 @@
+words,n_draws,mean_delta,sd_delta,cv,bootstrap_se
+370,200,1.885,0.107,0.057,0.0076

@@ -1,0 +1,4 @@
+test,observed_p,achieved_power
+"C1 JT gradient (LUAR, none)",0.00773,0.798
+"C3 dissociation (distinct-2 down, none)",7.6e-05,1.0
+"C2 style-card ablation (LUAR full>none, pooled)",1e-05,1.0

@@ -1,0 +1,2 @@
+cov_total,cov_between,cov_within_mean,share_between,share_within,icc_luar,icc_certifier,r_pearson_pooled,r_pearson_between,r_pearson_within,r_pearson_reconstructed,sp_pooled,sp_between,sp_within_mean,sp_within_mean_ci_lo,sp_within_mean_ci_hi
+0.0096,0.0098,-0.0002,1.0178,-0.0178,0.7355,0.5985,0.2597,0.3983,-0.0142,0.2597,0.273,0.4346,0.016,-0.0889,0.119
